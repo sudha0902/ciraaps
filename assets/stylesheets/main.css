@@ -1,0 +1,322 @@
+.info {
+  margin: 0 0 20px 20px;
+  font-family: 'Chalkboard';
+  font-size: 20px;
+  	color:#0088cc;
+}
+
+.welcometitle-tobacco{
+    line-height: 100px;
+    margin: 50px 10px 10px 25px;
+    font-family: 'Shadows Into Light';
+    font-size: 72px;
+    font-style: bold;
+	color:#FF8533;  
+}
+.welcome-tobacco{
+    line-height: 35px;
+    margin:20px 10px 10px 50px;
+	color:#FF8533; 
+}
+.welcometitle-sexual{
+    line-height: 100px;
+    margin:20px 10px 10px 25px;
+	font-family: 'Shadows Into Light';
+    font-size: 72px;
+    font-style: bold;
+	color:#6F5F8F;  
+}
+.welcome-sexual{
+    line-height: 35px;
+    margin:20px 10px 10px 50px;
+	color:#6F5F8F; 
+}
+.welcometitle-raaps{
+    line-height: 100px;
+    margin:20px 10px 10px 25px;
+    font-family: 'Shadows Into Light';
+    font-size: 72px;
+    font-style: bold;
+	color:#0088CC;  
+}
+.welcome-raaps{
+    line-height: 35px;
+    margin:20px 10px 10px 50px;
+	color:#0088CC; 
+}
+
+.questiontitle-tobacco{
+    line-height: 50px;
+    margin: 50px 10px 10px 25px;
+    font-family: 'Shadows Into Light';
+    font-size: 42px;
+    font-style: bold;
+	color:#FF8533;  
+}
+.question{
+     line-height: 35px; 
+         	font-family: 'Oxygen', 'Open Sans';
+	/* font-family: 'Century Gothic'; */
+    margin:10px 10px 10px 50px;
+ /*   color:#466794;  added to see what css file used */
+}
+.questiontitle-sexual{
+    line-height: 50px;
+    margin: 50px 10px 10px 25px;
+    font-family: 'Shadows Into Light';
+    font-size: 42px;
+    font-style: bold;
+	color:#6F5F8F;  
+}
+.questiontitle-raaps{
+    line-height: 50px;
+    margin: 50px 10px 10px 25px;
+    font-family: 'Shadows Into Light';
+    font-size: 42px;
+    font-style: bold;
+	color:#0088CC;  
+}
+.understand{
+    line-height: 35px;
+	color:#3094B7;  
+	font-size: 16px;
+	font-style: bold;
+}
+
+.slidertext{
+     line-height: 20px; 
+            	font-family: 'Oxygen', 'Open Sans';
+	/* font-family: 'Century Gothic'; */
+	font-size: 14px;
+}
+.direct{
+    line-height: 15px;
+    margin: 20px 0px 5px 50px;
+    color:#A3A3A3;
+            	font-family: 'Oxygen', 'Open Sans';
+	/* font-family: 'Century Gothic'; */
+    font-size: 14px;
+    font-style: italic; 
+    text-align: left;
+}
+.directtitle{
+  /*  line-height: 15px;
+    margin: 20px 0px 5px 50px; */
+    color:#0088CC;
+   /* font-family: 'Century Gothic'; */
+    font-size: 14px;
+    text-align: left;
+}
+.answer{
+	font-size:16px;
+}
+.center{
+    text-align:center;
+}
+.right{
+    text-align: right;
+}
+.content{
+    vertical-align: top;
+}
+.sidebar{
+    /* vertical-align: top; */
+    display: inline-block;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.sidebar > div{
+   /*min-height: 300px;*/
+   width: 100%
+}
+#imgCnt{
+    width: 600px;  /* was 500px */
+    height: 500px;  /* was 500 px */
+    overflow: hidden;
+    margin: 0px auto;  /* added for shma */
+    /*margin-left: auto;
+    margin-right: auto; */
+}
+
+#imgCnt img{
+   height: 500px; 
+   /*width: 100%; */
+   position: top; /* modified from relative */
+   top: 50%;
+   /*transform: translateY(-50%);   - not working in chrome*/
+} 
+
+.survey{
+    display: inline-block;
+    margin-left: 20px;          /* change from 20px */
+    max-width: 80%;         /* change from 48% */
+}
+.col2{
+    display: inline-block;
+}
+#slider{
+    margin: 7px auto;
+}
+#sValue{
+    width: 15px;
+    border: none;
+}
+input[type='checkbox'],
+input[type='radio']{
+    margin-right: 10px;
+	
+}
+
+/*.btn-next{
+    float: right;
+} */
+#scmaMsg{
+    margin-top: 20px;
+}
+/* adding custom buttons */
+.btn-next {
+  color: #fff;
+  border-color: #3094B7;
+  background-color: #3094B7;
+  padding: 8px 35px;
+  margin: 5px;
+  float: right;   /* added */
+
+}
+.btn-next a {
+  color: #fff;
+  border-color: #3094B7;
+  background-color: #3094B7;
+}
+.btn-next:hover a {background-color: #156D84; text-decoration:none;}
+
+.btn-next:hover,
+.btn-next:focus,
+.btn-next.focus,
+.btn-next:active,
+.btn-next.active {
+  color: #ffffff;
+  background-color: #156D84;
+  border-color: #156D84;
+}
+
+.btn-next1 {
+  color: #fff;
+  border-color: #5959ac;
+  background-color: #5959ac;
+  padding: 8px 35px;
+  margin: 5px;
+  float: right;   /* added */
+
+}
+.btn-next1 a {
+  color: #fff;
+  border-color: #333399;
+  background-color: #333399;
+}
+.btn-next1:hover a {background-color: #333399; text-decoration:none;}
+
+.btn-next1:hover,
+.btn-next1:focus,
+.btn-next1.focus,
+.btn-next1:active,
+.btn-next1.active {
+  color: #ffffff;
+  background-color: #333399;
+  border-color: #333399;
+}
+/* tobacco */
+.btn-tobacco {
+  color: #fff;
+  border-color: #FF8533;
+  background-color: #FF8533;
+  padding: 8px 35px;
+  margin: 5px;
+  float: right;   /* added */
+}
+.btn-tobacco a {
+  color: #fff;
+  border-color: #FF8533;
+  background-color: #FF8533;
+}
+.btn-tobacco:hover a {background-color: #E6782E; text-decoration:none;}
+
+.btn-tobacco:hover,
+.btn-tobacco:focus,
+.btn-tobacco.focus,
+.btn-tobacco:active,
+.btn-tobacco.active {
+  color: #ffffff;
+  background-color: #E6782E;
+  border-color: #E6782E;
+}
+
+/* sexual button */
+.btn-sexual {
+  color: #fff;
+  border-color: #6F5F8F;
+  background-color: #6F5F8F;
+  padding: 8px 35px;
+  margin: 5px;
+  float: right;   /* added */
+}
+.btn-sexual a {
+  color: #fff;
+  border-color: #6F5F8F;
+  background-color: #6F5F8F;
+}
+.btn-sexual:hover a {background-color: #645681; text-decoration:none;}
+
+.btn-sexual:hover,
+.btn-sexual:focus,
+.btn-sexual.focus,
+.btn-sexual:active,
+.btn-sexual.active {
+  color: #ffffff;
+  background-color: #645681;
+  border-color: #645681;
+}
+
+/* raaps button */
+.btn-raaps {
+  color: #fff;
+  border-color: #0088CC;
+  background-color: #0088CC;
+  padding: 8px 35px;
+  margin: 5px;
+  float: right;   /* added */
+}
+.btn-raaps a {
+  color: #fff;
+  border-color: #0088CC;
+  background-color: #0088CC;
+}
+.btn-raaps:hover a {background-color: #007AB8; text-decoration:none;}
+
+.btn-raaps:hover,
+.btn-raaps:focus,
+.btn-raaps.focus,
+.btn-raaps:active,
+.btn-raaps.active {
+  color: #ffffff;
+  background-color: #007AB8;
+  border-color: #007AB8;
+}
+
+form label{
+    display: block;
+}
+.line-graph{
+    height: 400px;
+    min-width: 800px;
+}
+
+.datascroll{
+    overflow: scroll;
+}
+
+.risktable{
+	width: 100%
+}
+
+/* latin */

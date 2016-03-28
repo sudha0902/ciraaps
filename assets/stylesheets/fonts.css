@@ -1,0 +1,137 @@
+/*
+@font-face {
+    font-family: ShadowIntoLight;
+    src: url(fonts/ShadowsintoLight.ttf);
+}
+
+@font-face {
+    font-family: Open Sans;
+    src: url(fonts/ShadowsintoLight.ttf);
+}
+
+@font-face {
+    font-family: Century Gothic;
+    src: url(fonts/ShadowsintoLight.ttf);
+}
+*/
+/* similar to Century Gothic
+font-family: Muli;
+@import url(http://assets/stylesheets/fonts.googleapis.com/css?family=Muli:300,400,400italic,300italic);
+<link href='http://assets/stylesheets/fonts.googleapis.com/css?family=Muli:300,400,400italic,300italic' rel='stylesheet' type='text/css'>
+*/
+
+/* similar to Avenir 
+<link href='http://assets/stylesheets/fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+font-family: 'Nunito', sans-serif;
+@import url(http://assets/stylesheets/fonts.googleapis.com/css?family=Nunito:400,300,700);
+*/
+@font-face {
+  font-family: 'Shadows Into Light';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Shadows-Into-Light-regular/Shadows-Into-Light-regular.eot');
+  src: url('/assets/stylesheets/fonts/Shadows-Into-Light-regular/Shadows-Into-Light-regular.eot?#iefix') format('embedded-opentype'),
+       local('Shadows Into Light'),
+       local('Shadows-Into-Light-regular'),
+       url('/assets/stylesheets/fonts/Shadows-Into-Light-regular/Shadows-Into-Light-regular.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Shadows-Into-Light-regular/Shadows-Into-Light-regular.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Shadows-Into-Light-regular/Shadows-Into-Light-regular.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Shadows-Into-Light-regular/Shadows-Into-Light-regular.svg#ShadowsIntoLight') format('svg');
+}
+@font-face {
+  font-family: 'Muli';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Muli-regular/Muli-regular.eot');
+  src: url('/assets/stylesheets/fonts/Muli-regular/Muli-regular.eot?#iefix') format('embedded-opentype'),
+       local('Muli'),
+       local('Muli-regular'),
+       url('/assets/stylesheets/fonts/Muli-regular/Muli-regular.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Muli-regular/Muli-regular.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Muli-regular/Muli-regular.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Muli-regular/Muli-regular.svg#Muli') format('svg');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Open-Sans-regular/Open-Sans-regular.eot');
+  src: url('/assets/stylesheets/fonts/Open-Sans-regular/Open-Sans-regular.eot?#iefix') format('embedded-opentype'),
+       local('Open Sans'),
+       local('Open-Sans-regular'),
+       url('/assets/stylesheets/fonts/Open-Sans-regular/Open-Sans-regular.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Open-Sans-regular/Open-Sans-regular.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Open-Sans-regular/Open-Sans-regular.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Open-Sans-regular/Open-Sans-regular.svg#OpenSans') format('svg');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Open-Sans-600/Open-Sans-600.eot');
+  src: url('/assets/stylesheets/fonts/Open-Sans-600/Open-Sans-600.eot?#iefix') format('embedded-opentype'),
+       local('Open Sans Semibold'),
+       local('Open-Sans-600'),
+       url('/assets/stylesheets/fonts/Open-Sans-600/Open-Sans-600.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Open-Sans-600/Open-Sans-600.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Open-Sans-600/Open-Sans-600.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Open-Sans-600/Open-Sans-600.svg#OpenSans') format('svg');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Open-Sans-700/Open-Sans-700.eot');
+  src: url('/assets/stylesheets/fonts/Open-Sans-700/Open-Sans-700.eot?#iefix') format('embedded-opentype'),
+       local('Open Sans Bold'),
+       local('Open-Sans-700'),
+       url('/assets/stylesheets/fonts/Open-Sans-700/Open-Sans-700.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Open-Sans-700/Open-Sans-700.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Open-Sans-700/Open-Sans-700.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Open-Sans-700/Open-Sans-700.svg#OpenSans') format('svg');
+}
+@font-face {
+  font-family: 'Oxygen';
+  font-weight: 300;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Oxygen-300/Oxygen-300.eot');
+  src: url('/assets/stylesheets/fonts/Oxygen-300/Oxygen-300.eot?#iefix') format('embedded-opentype'),
+       local('Oxygen Light'),
+       local('Oxygen-300'),
+       url('/assets/stylesheets/fonts/Oxygen-300/Oxygen-300.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Oxygen-300/Oxygen-300.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Oxygen-300/Oxygen-300.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Oxygen-300/Oxygen-300.svg#Oxygen') format('svg');
+}
+
+@font-face {
+  font-family: 'Oxygen';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Oxygen-regular/Oxygen-regular.eot');
+  src: url('/assets/stylesheets/fonts/Oxygen-regular/Oxygen-regular.eot?#iefix') format('embedded-opentype'),
+       local('Oxygen'),
+       local('Oxygen-regular'),
+       url('/assets/stylesheets/fonts/Oxygen-regular/Oxygen-regular.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Oxygen-regular/Oxygen-regular.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Oxygen-regular/Oxygen-regular.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Oxygen-regular/Oxygen-regular.svg#Oxygen') format('svg');
+}
+
+@font-face {
+  font-family: 'Oxygen';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/assets/stylesheets/fonts/Oxygen-700/Oxygen-700.eot');
+  src: url('/assets/stylesheets/fonts/Oxygen-700/Oxygen-700.eot?#iefix') format('embedded-opentype'),
+       local('Oxygen Bold'),
+       local('Oxygen-700'),
+       url('/assets/stylesheets/fonts/Oxygen-700/Oxygen-700.woff2') format('woff2'),
+       url('/assets/stylesheets/fonts/Oxygen-700/Oxygen-700.woff') format('woff'),
+       url('/assets/stylesheets/fonts/Oxygen-700/Oxygen-700.ttf') format('truetype'),
+       url('/assets/stylesheets/fonts/Oxygen-700/Oxygen-700.svg#Oxygen') format('svg');
+}
+
+

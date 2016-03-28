@@ -1,0 +1,915 @@
+/* Add here all your CSS customizations */
+.showtime{
+    line-height: 14px;
+	color:#3094B7;  
+	/*color:#66FF66; */
+	font-size: 14px;
+	/*font-weight: bold; */
+	margin-left: 30px;
+}
+.checkit{
+    line-height: 20px;
+	color:#FFFFFF;  
+	font-size: 16px;
+	font-style: bold;
+}
+
+.directions{
+    line-height: 20px;
+	color:#3094B7;  
+	font-size: 14px;
+	font-style: bold;
+}
+.standout{
+    line-height: 20px;
+	color:#66FF66;  
+	font-size: 16px;
+	font-style: bold;
+}
+.revquest{
+    line-height: 20px;
+	color:#000000;  
+	font-size: 16px;
+	font-style: bold;
+}
+.revlabel{
+    line-height: 16px;
+	color:#0088CC;  
+	font-size: 14px;
+	font-style: bold;
+}
+.raapslabel{
+	color:#0088CC;  
+	font-size: 14px;
+	font-style: bold;
+}
+.smallfoot{
+    line-height: 13px;
+	color:#CCCCCC;  
+	font-size: 11px;
+}
+.hdrsexual{
+	color:#6F5F8F;  
+	font-size: 14px;
+	  margin-top: 10px;
+  margin-bottom: 10px;
+	/*font-weight: bold; */
+}
+.reporttitlesexual{
+	color:#6F5F8F;  
+	font-size: 13px;
+	font-weight: bold;
+}
+.msgtitleSsexual{
+	color:#6F5F8F; 
+	font-family: "Shadows Into Light"; 
+	font-size: 20px;
+	font-style: bolder;
+}
+.msgtitleCsexual{
+	color:#6F5F8F;  
+	font-size: 16px;
+	font-style: bolder;
+}
+.msgtitleStobacco{
+	color:#FF8533; 
+	font-family: "Shadows Into Light"; 
+	font-size: 20px;
+	font-style: bold;
+}
+.msgtitleCtobacco{
+	color:#FF8533;  
+	font-size: 16px;
+	font-style: bold;
+}
+.msgtitleSraaps{
+	color:#0088CC; 
+	font-family: "Shadows Into Light"; 
+	font-size: 20px;
+	font-style: bold;
+}
+.msgtitleCraaps{
+	color:#0088CC;  
+	font-size: 16px;
+	font-style: bold;
+}
+.dashtitleraaps{
+	color:#0088CC;  
+	font-size: 22px;
+	font-style: bold;
+}
+.titleStobacco{
+	color:#FF8533; 
+	font-family: "Shadows Into Light"; 
+	font-size: 26px;
+	font-style: bold;
+}
+
+/* Form - Custom Checkbox */
+.checkbox-custom {
+	position: relative;
+	padding: 0 0 0 25px;
+	margin-bottom: 7px;
+	margin-top: 0;
+}
+
+.checkbox-custom2 {
+	position: relative;
+	padding: 0 0 0 0px;
+	margin-bottom: 0px;
+	margin-top: 0;
+	  display: inline-block;
+  /* padding-left: 20px; */
+  font-weight: normal;
+  vertical-align: middle;
+  cursor: pointer;
+  align-self:center;
+}
+
+
+.checkbox-custom.checkbox-inline {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.form-group .checkbox-custom.checkbox-inline {
+	margin-top: 7px;
+	padding-top: 0;
+}
+
+.checkbox-custom:last-child, .checkbox-custom:last-of-type {
+	margin-bottom: 10px;
+	font-size: small;
+}
+
+.checkbox-custom input[type="checkbox"] {
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	margin: -6px 0 0 0;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.checkbox-custom input[type="checkbox"]:checked + label:after {
+	position: absolute;
+	display: inline-block;
+	font-family: 'FontAwesome';
+	content: '\F00C';
+	top: 50%;
+	left: 4px;
+	margin-top: -5px;
+	font-size: 10px;
+	line-height: 1;
+	width: 16px;
+	height: 16px;
+	color: #CCC;  /* was 333 */
+}
+
+.checkbox-custom input[type="checkbox"]:disabled {
+	cursor: not-allowed;
+}
+
+.checkbox-custom input[type="checkbox"]:disabled:checked + label:after {
+	color: #999;
+}
+
+.checkbox-custom input[type="checkbox"]:disabled + label {
+	cursor: not-allowed;
+	font-size: small;
+}
+
+.checkbox-custom input[type="checkbox"]:disabled + label:before {
+	background-color: #EEE;  /* was 6F5F8F */
+}
+
+.checkbox-custom label {
+	cursor: pointer;
+	margin-bottom: 0;
+	margin-left: 20px;  /* added */
+	text-align: left;
+	line-height: 1.2;
+	         	font-family: 'Oxygen', 'Open Sans';
+	/* font-family: 'Century Gothic'; */
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.checkbox-custom label:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -9px;
+	width: 19px;
+	height: 18px;
+	display: inline-block;
+	border-radius: 2px;
+	border: 1px solid #bbb;
+	background: #fff;
+}
+
+.checkbox-custom label + label.error {
+	display: block;
+}
+
+html.dark .checkbox-custom label:before {
+	background: #282d36;
+	border-color: #21262d;
+}
+
+html.dark .checkbox-custom input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-custom input[type="checkbox"]:disabled + label:before {
+	background: #242830;
+	border-color: #242830;
+}
+
+html.dark .checkbox-primary input[type="checkbox"]:checked + label:after,
+.checkbox-primary input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-primary label:before,
+.checkbox-primary label:before {
+	background: #cccccc;    /* set to 6F5F8F for shma */
+	border-color: #bfbfbf;
+}
+
+html.dark .checkbox-text-primary input[type="checkbox"]:checked + label:after,
+.checkbox-text-primary input[type="checkbox"]:checked + label:after {
+	color: #cccccc;
+}
+/* added for RAAPS survey */
+html.dark .checkbox-tobacco label:before,
+.checkbox-tobacco label:before {
+	background: #FF8533;
+	border-color: #bfbfbf;
+}
+html.dark .checkbox-tobacco input[type="checkbox"]:checked + label:before,
+.checkbox-tobacco input[type="checkbox"]:checked + label:before {
+	background: #3094B7;
+	border-color: #bfbfbf;
+}
+html.dark .checkbox-text-tobacco  input[type="checkbox"]:checked + label:after,
+.checkbox-text-tobacco input[type="checkbox"]:checked + label:after {
+	color: #cccccc;
+}
+
+html.dark .checkbox-sexual label:before,
+.checkbox-sexual label:before {
+	background: #6F5F8F;
+	border-color: #bfbfbf;
+}
+html.dark .checkbox-sexual input[type="checkbox"]:checked + label:before,
+.checkbox-sexual input[type="checkbox"]:checked + label:before {
+	background: #3094B7;
+	border-color: #bfbfbf;
+}
+html.dark .checkbox-text-sexual input[type="checkbox"]:checked + label:after,
+.checkbox-text-sexual input[type="checkbox"]:checked + label:after {
+	color: #cccccc;
+}
+
+html.dark .checkbox-raaps label:before,
+.checkbox-raaps label:before {
+	background: #0088CC;
+	border-color: #bfbfbf;
+}
+html.dark .checkbox-raaps input[type="checkbox"]:checked + label:before,
+.checkbox-raaps input[type="checkbox"]:checked + label:before {
+	background: #3094B7;
+	border-color: #bfbfbf;
+}
+html.dark .checkbox-text-raaps  input[type="checkbox"]:checked + label:after,
+.checkbox-text-raaps input[type="checkbox"]:checked + label:after {
+	color: #cccccc;
+}
+/* end of custom for RAAPS */
+
+
+
+
+html.dark .checkbox-success input[type="checkbox"]:checked + label:after,
+.checkbox-success input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-success label:before,
+.checkbox-success label:before {
+	background: #47a447;
+	border-color: #3f923f;
+}
+
+html.dark .checkbox-text-success input[type="checkbox"]:checked + label:after,
+.checkbox-text-success input[type="checkbox"]:checked + label:after {
+	color: #47a447;
+}
+
+html.dark .checkbox-warning input[type="checkbox"]:checked + label:after,
+.checkbox-warning input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-warning label:before,
+.checkbox-warning label:before {
+	background: #ed9c28;
+	border-color: #e89113;
+}
+
+html.dark .checkbox-text-warning input[type="checkbox"]:checked + label:after,
+.checkbox-text-warning input[type="checkbox"]:checked + label:after {
+	color: #ed9c28;
+}
+
+html.dark .checkbox-danger input[type="checkbox"]:checked + label:after,
+.checkbox-danger input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-danger label:before,
+.checkbox-danger label:before {
+	background: #d2322d;
+	border-color: #bd2d29;
+}
+
+html.dark .checkbox-text-danger input[type="checkbox"]:checked + label:after,
+.checkbox-text-danger input[type="checkbox"]:checked + label:after {
+	color: #d2322d;
+}
+
+html.dark .checkbox-info input[type="checkbox"]:checked + label:after,
+.checkbox-info input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-info label:before,
+.checkbox-info label:before {
+	background: #5bc0de;
+	border-color: #46b8da;
+}
+
+html.dark .checkbox-text-info input[type="checkbox"]:checked + label:after,
+.checkbox-text-info input[type="checkbox"]:checked + label:after {
+	color: #5bc0de;
+}
+
+html.dark .checkbox-dark input[type="checkbox"]:checked + label:after,
+.checkbox-dark input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-dark label:before,
+.checkbox-dark label:before {
+	background: #171717;
+	border-color: #0a0a0a;
+}
+
+html.dark .checkbox-text-dark input[type="checkbox"]:checked + label:after,
+.checkbox-text-dark input[type="checkbox"]:checked + label:after {
+	color: #171717;
+}
+
+/* added for risk review */
+html.dark .checkbox-highrisk input[type="checkbox"]:checked + label:after,
+.checkbox-highrisk input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-highrisk label:before,
+.checkbox-highrisk label:before {
+	background: #FF8533;
+	border-color: #FF9147;
+}
+
+html.dark .checkbox-text-highrisk input[type="checkbox"]:checked + label:after,
+.checkbox-text-highrisk input[type="checkbox"]:checked + label:after {
+	color: #FF8533;
+}
+html.dark .checkbox-medrisk input[type="checkbox"]:checked + label:after,
+.checkbox-medrisk input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-medrisk label:before,
+.checkbox-medrisk label:before {
+	background: #CCCC00;
+	border-color: #D1D119
+}
+
+html.dark .checkbox-text-medrisk input[type="checkbox"]:checked + label:after,
+.checkbox-text-medrisk input[type="checkbox"]:checked + label:after {
+	color: #CCCC00;
+}
+html.dark .checkbox-lowrisk input[type="checkbox"]:checked + label:after,
+.checkbox-lowrisk input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-lowrisk label:before,
+.checkbox-lowrisk label:before {
+	background: #6F5F8F;
+	border-color: #7D6F9A;
+}
+
+html.dark .checkbox-text-lowrisk input[type="checkbox"]:checked + label:after,
+.checkbox-text-lowrisk input[type="checkbox"]:checked + label:after {
+	color: #6F5F8F;
+}
+
+html.dark .checkbox-sexual input[type="checkbox"]:checked + label:after,
+.checkbox-sexual input[type="checkbox"]:checked + label:after {
+	color: #fff;
+}
+
+html.dark .checkbox-sexual label:before,
+.checkbox-sexual label:before {
+	background: #8C7FA5;
+	border-color: #6F5F8F;
+}
+
+html.dark .checkbox-text-sexual input[type="checkbox"]:checked + label:after,
+.checkbox-text-sexual input[type="checkbox"]:checked + label:after {
+	color: #6F5F8F;
+}
+
+
+/* Form - Custom Radio */
+.radio-custom {
+	position: relative;
+	padding: 0 0 0 25px;
+	margin-bottom: 7px;
+	margin-top: 0;
+}
+
+.radio-custom.radio-inline {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.form-group .radio-custom.radio-inline {
+	margin-top: 7px;
+	padding-top: 0;
+}
+
+.radio-custom:last-child, .radio-custom:last-of-type {
+	margin-bottom: 10px;
+}
+
+.radio-custom input[type="radio"] {
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 3px;
+	margin: -6px 0 0 0;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.radio-custom input[type="radio"]:checked + label:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 4px;
+	margin-top: -5px;
+	display: inline-block;
+	         	font-family: 'Oxygen', 'Open Sans';
+	/* font-family: 'Century Gothic'; */
+	font-size: 11px;
+	line-height: 1;
+	width: 10px;
+	height: 10px;
+	background-color: #444;
+	border-radius: 50px;
+	-webkit-box-shadow: 0px 0px 1px #444;
+	box-shadow: 0px 0px 1px #444;
+}
+
+.radio-custom input[type="radio"]:disabled {
+	cursor: not-allowed;
+}
+
+.radio-custom input[type="radio"]:disabled:checked + label:after {
+	color: #999;
+}
+
+.radio-custom input[type="radio"]:disabled + label {
+	cursor: not-allowed;
+}
+
+.radio-custom input[type="radio"]:disabled + label:before {
+	background-color: #eee;
+}
+/* used for questionaire selection lists */
+.radio-custom label {
+	cursor: pointer;
+	margin-bottom: 0;
+	margin-left: 20px;
+	text-align: left;
+	line-height: 1.2;
+	/*font-family: "Century Gothic"; */
+	font-family: 'Oxygen', 'Open Sans';
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.radio-custom label:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -9px;
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	border-radius: 50px;
+	border: 1px solid #bbb;
+	background: #fff;
+}
+
+.radio-custom label + label.error {
+	display: block;
+}
+
+html.dark .radio-custom label:before {
+	background: #282d36;
+	border-color: #21262d;
+}
+
+html.dark .radio-custom input[type="radio"]:checked + label:after {
+	background-color: #fff;
+}
+
+html.dark .radio-custom input[type="radio"]:disabled + label:before {
+	background: #242830;
+	border-color: #242830;
+}
+/* added for RAAPS surveys*/
+html.dark .radio-tobacco input[type="radio"]:checked + label:after,
+.radio-tobacco input[type="radio"]:checked + label:after {
+	background: #FF8533;
+	-webkit-box-shadow: 0px 0px 1px #cccccc;
+	box-shadow: 0px 0px 1px #cccccc;
+}
+html.dark .radio-sexual input[type="radio"]:checked + label:after,
+.radio-sexual input[type="radio"]:checked + label:after {
+	background: #6F5F8F;
+	-webkit-box-shadow: 0px 0px 1px #cccccc;
+	box-shadow: 0px 0px 1px #cccccc;
+}
+
+/* end for RAAPS */
+
+
+html.dark .radio-primary input[type="radio"]:checked + label:after,
+.radio-primary input[type="radio"]:checked + label:after {
+	background: #cccccc;
+	-webkit-box-shadow: 0px 0px 1px #cccccc;
+	box-shadow: 0px 0px 1px #cccccc;
+}
+
+html.dark .radio-success input[type="radio"]:checked + label:after,
+.radio-success input[type="radio"]:checked + label:after {
+	background: #47a447;
+	-webkit-box-shadow: 0px 0px 1px #47a447;
+	box-shadow: 0px 0px 1px #47a447;
+}
+
+html.dark .radio-warning input[type="radio"]:checked + label:after,
+.radio-warning input[type="radio"]:checked + label:after {
+	background: #ed9c28;
+	-webkit-box-shadow: 0px 0px 1px #ed9c28;
+	box-shadow: 0px 0px 1px #ed9c28;
+}
+
+html.dark .radio-danger input[type="radio"]:checked + label:after,
+.radio-danger input[type="radio"]:checked + label:after {
+	background: #d2322d;
+	-webkit-box-shadow: 0px 0px 1px #d2322d;
+	box-shadow: 0px 0px 1px #d2322d;
+}
+
+html.dark .radio-info input[type="radio"]:checked + label:after,
+.radio-info input[type="radio"]:checked + label:after {
+	background: #5bc0de;
+	-webkit-box-shadow: 0px 0px 1px #5bc0de;
+	box-shadow: 0px 0px 1px #5bc0de;
+}
+
+html.dark .radio-dark input[type="radio"]:checked + label:after,
+.radio-dark input[type="radio"]:checked + label:after {
+	background: #171717;
+	-webkit-box-shadow: 0px 0px 1px #171717;
+	box-shadow: 0px 0px 1px #171717;
+}
+
+/* latin */
+
+
+
+
+/* Added by LuovaDesign */
+[ng-click]{
+    cursor: pointer;
+}
+
+.panel-body, 
+.panel-footer,
+.widget-content{
+   /* display: none;*/
+}
+
+.bootstrap-timepicker-widget.dropdown-menu {
+	z-index: 1011;
+    display: inline-block;
+    padding: 10px;
+}
+
+/* Goal Rating Styles */
+.goalDisplay{
+
+}
+.goalProgress{
+
+}
+.goalBase{
+
+}
+
+/* RAAPS colors */
+/* panel - tobacco*/
+html .panel-tobacco .panel-heading {
+	background: #FF8533;
+}
+html .panel-tobacco .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-tobacco .panel-title {
+	color: white;
+}
+html .panel-tobacco .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panel - sexual */
+html .panel-sexual .panel-heading {
+	background: #6F5F8F;
+}
+html .panel-sexual .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-sexual .panel-title {
+	color: white;
+}
+html .panel-sexual .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panel - raaps */
+html .panel-raaps .panel-heading {
+	background: #0088CC;
+}
+html .panel-raaps .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-raaps .panel-title {
+	color: white;
+}
+html .panel-raaps .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+
+/* panel - high risk raaps */
+html .panel-highrisk .panel-heading {
+	background: #FF8533;
+}
+html .panel-highrisk .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-highrisk .panel-title {
+	color: white;
+}
+html .panel-highrisk .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+
+/* panel - med risk raaps */
+html .panel-medrisk .panel-heading {
+	background: #CCCC00;
+}
+html .panel-medrisk .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-medrisk .panel-title {
+	color: white;
+}
+html .panel-medrisk .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panel - low risk raaps */
+html .panel-lowrisk .panel-heading {
+	background: #6F5F8F;
+}
+html .panel-lowrisk .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-lowrisk .panel-title {
+	color: white;
+}
+html .panel-lowrisk .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+
+.panel-title-tobacco {
+	color: #FF8533;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 20px;
+	padding: 0;
+	text-transform: none;
+}
+
+.panel-title-sexual {
+	color: #6F5F8F;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 20px;
+	padding: 0;
+	text-transform: none;
+}
+.panel-title-raaps {
+	color: #0088CC;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 20px;
+	padding: 0;
+	text-transform: none;
+}
+/* panel - pale blue*/
+html .panel-pale .panel-heading {
+	background: #81A8BD;
+}
+html .panel-pale .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-pale .panel-title {
+	color: white;
+}
+html .panel-pale .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panel - goals reminders*/
+html .panel-goals .panel-heading {
+	background: #466794;
+}
+html .panel-goals .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-goals .panel-title {
+	color: white;
+}
+html .panel-goals .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panel - yellow */
+html .panel-yellow .panel-heading {
+	background: #CCCC00;
+}
+html .panel-yellow .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-yellow .panel-title {
+	color: white;
+}
+html .panel-yellow .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panel - std */
+html .panel-std .panel-heading {
+	background: #145D8E;
+}
+html .panel-std .panel-subtitle {
+	opacity: 0.8;
+	color: white;
+}
+html .panel-std .panel-title {
+	color: white;
+}
+html .panel-std .panel-actions a {
+	background-color: transparent !important;
+	color: white;
+}
+/* panels - custom */
+.panel-featured-tobacco {
+	border-color: #ff8533;
+}
+.panel-featured-tobacco .panel-title {
+	color: #ff8533;
+}
+.panel-featured-sexual {
+	border-color: #6f5f8f;
+}
+.panel-featured-sexual .panel-title {
+	color: #6f5f8f;
+}
+.panel-featured-raaps {
+	border-color: #0088cc;
+}
+.panel-featured-raaps .panel-title {
+	color: #0088cc;
+}
+.panel-featured-appts {
+	border-color: #8da35d;
+}
+.panel-featured-appts .panel-title {
+	color: #8da35d;
+}
+.panel-featured-goals {
+	border-color: #466794;
+}
+.panel-featured-goals .panel-title {
+	color: #466794;
+}
+.panel-featured-Rmessages {
+	border-color: #0088CC;
+	border-left: 
+		border-left-width: 5px;
+		border-left-style: solid;
+		border-left-color: 0088CC;
+		border-radius: 5px;
+		
+}
+.panel-featured-Rmessages .panel-title {
+	color: #0088CC;
+}
+
+
+
+/* Progress bar states */
+.progress .progress-bar-tobacco {
+	background-color: #ff8533;
+}
+.progress .progress-bar-sexual {
+	background-color: #6f5f8f;
+}
+.progress .progress-bar-raaps {
+	background-color: #0088cc;
+}
+.progress .progress-bar-green {
+	background-color: #8ds35d;
+}
+.progress .progress-bar-royal {
+	background-color: #5279ad;
+}
+
+
+body .btn-survey {
+	border-color: #5bc0de;
+	background-color: #5bc0de;
+	border-color: #5bc0de #5bc0de #31b0d5;
+	color: white;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	font-size: 16px;
+}
+
+body .btn-survey:hover {
+	border-color: #70c8e2;
+	background-color: #70c8e2;
+	color: white;
+}
+
+body .btn-survey:active, body .btn-survey:focus {
+	border-color: #46b8da;
+	background-color: #46b8da;
+	color: white;
+}
+
+body .btn-survey.dropdown-toggle {
+	border-left-color: #46b8da;
+}
+
+body .btn-survey[disabled] {
+	border-color: #b0e1ef;
+	background-color: #b0e1ef;
+}
+
+
