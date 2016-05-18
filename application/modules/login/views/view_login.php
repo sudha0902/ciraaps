@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 						</div>
 
-						<div class="row">
+						<div class=""form-group mb-lg"">
 							<div class="col-sm-8">
 								<!--<p>  sign into our demo system  </p>
 												<div class="checkbox-custom checkbox-default">
@@ -88,10 +88,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<label for="RememberMe">Remember Me</label>
 												</div> -->
 							</div>
+							
 							<div id="signIn" class="col-sm-4 text-right">
 								<button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
 								<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">
 								Sign In</button>
+							</div>
+							<div class="clearfix">
+								<a	href="/login/register" class="pull-left">Register</a>
 							</div>
 						</div>
 
@@ -144,8 +148,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
 	} 
 	$(document).ready(function()	{
-		sleepFor(2000);
-		$('#errmsg').text("");
+		if ($('#errmsg').text() !== ""){
+			sleepFor(3000);
+			$('#errmsg').text("");
+		}
 		
 	})
    </script>
