@@ -2,27 +2,31 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-
-	/*  just testing
-	public function userlist()
+	
+  	
+	public function __Construct()
 	{
+		parent::__construct();
+		$this->load->database();
+		$this->load->config('auth_config');
+		$this->load->library(array('session', 'form_validation'));
+		$this->load->helper(array('url','language','PasswordHash'));
 		$this->load->model('usersmodel');
-		$data['qresult'] = $this->usersmodel->getAllOrderBy('Username');
-		$this->load->view('users_list', $data);
+		$this->form_validation->set_error_delimiters($this->config->item('<div class="alert alert-danger">', '</div>'));
 	}
-	*/
+	
+	/**
+	 * 
+	 */
 	public function index()
 	{
-		$data = array();
+		//$uuid = "p4c_38e65ce1-1882-11e6-8fbd-a0d3c1985d91";
+		//redirect("/login/setSecurityQuestion/$uuid");
 		if ($this->input->post())
 		{
-  	  		$username = $this->input->post('username');
-			$pwd = $this->input->post('pwd');
-			$CI =& get_instance();
-			$CI->load->helper("PasswordHash");
-			$this->load->model('usersmodel');
+  	  		$username = $this->input->post('username', true);
+			$pwd = $this->input->post('pwd', true);
 			$valid_uuid = $this->usersmodel->validate_userpwd($username, $pwd);
-			
 			if (!$valid_uuid){
 				$data['username'] = $username;
 				$data['pwd'] = $pwd;
@@ -30,81 +34,243 @@ class Login extends CI_Controller {
 			}
 			else 
 			{
-				$this->_login($valid_uuid);
+				$this->login($valid_uuid);
 			}
 		}
+		else{ 
+			$data = array();
+		}
+		$data['login_setup'] = $this->config->item('Login_Setup');
 		$this->load->view('view_login', $data);
 	
 	}
-	public function lostpwd()
+	public function forgotUserName()
 	{
-		   if ($this->input->post()){
-
-		   	//  get ajax call params
- 		   	$action = $this->input->post('action', true);
-		   	$username = $this->input->post('userName', true);
-		   	if (($this->input->post('answer'))){
-		   		$answer = strtolower( $this->input->post('answer', true));
-		   		$data['answer'] = $answer;
-		   	}
-		   	
-		   	$this->load->model('usersmodel');
-				$qryresult = $this->usersmodel->$action($username);
-				//$data['num_rows'] = $qryresult->num_rows();
-				//$data['result'] = $qryresult;
-		   	if ($qryresult->num_rows() >0){
-		   		$data['success'] = true;
-		   		$data['question'] = $qryresult->row()->SecQuestion;
-		   		if (isset($answer))
-		   		{
-		   			if ($answer === strtolower($qryresult->row()->ua_SecAnswer)){	
-              			$data['success'] = true;
-							//$this->load->helper('SessionStart');
-		   				//initialize_session($username);
-							$uuid = $qryresult->row()->ua_uuid;
-              			$data['url'] = "/login/resetpwd/$uuid";
-		   			}
-		   			else{
-		   				$data['success'] = false;
-		   			}
-		   			
-		   		}
-		   	}
-		   	else {
-		   		$data['success'] = false;
-		   	}
-		  		header("Content-Type : application/json");
-		   	echo json_encode($data);
-		   	die();
+		
+		if ($this->input->post())
+		{
+			$fname = $this->input->post('fname', true);
+			$lname = $this->input->post('lname', true);
+			$email = $this->input->post('email', true);
+			$result = $this->usersmodel->getUserName($fname, $lname, $email);	
+			if ($result['success'])
+			{
+				$username = $result['username'];
+				$success = $this->_send_username_email($email,$username);
+				if ($success){
+					$data['message'] = "Your Username has been sent to your Email"; 
+			   	$data['success'] = true;
+				}
+			   else {
+			   	$data['message'] = "Error Sending Email";
+			   	$data['success'] = false;
+			   }
+ 			}	
+ 			else 
+ 			{
+ 				$data['message'] = $result['errmsg'];
+ 				$data['success'] = false;
+ 			}
+ 			header("Content-Type : application/json");
+ 			echo json_encode($data);
+ 			die();
+		}
+		else
+		{
+			$this->load->view("view_forgotUser");
+		}
+		
+	}
+	public function forgotPwd()
+	{
+			if ($this->config->item('Pwd_Retrieval_Method', 'Login_Setup') === "SecQuestion")
+			{
+				redirect("/login/lostpwd1");
+			}
+		   if ($this->config->item('Pwd_Retrieval_Method','Login_Setup') === "Email") 
+		   {
+		   	redirect("/login/lostpwd2");
 		   }
-			$this->load->view('view_lostpwd');
-	
 	}
 	
+	public function lostpwd1()
+	{
+		if ($this->input->post())
+		{
+	   	//  get ajax call params
+ 		  	$action = $this->input->post('action', true);
+		  	$username = $this->input->post('userName', true);
+		  	if ($action == "getSecurityQuestions")	
+		  	{	  	
+		  		$qryresult = $this->usersmodel->getSecurityQuestions($username);
+				if ($qryresult->num_rows() == 1){
+		  			$data['success'] = true;
+		  			$row = $qryresult->row();
+		  			$noOfQuestions = $this->config->item("No_Of_SecQuestions","Login_Setup");
+		  			for ($i = 1; $i <= $noOfQuestions; $i++)
+		  			{
+		  				$qfield = "question$i";
+		  				$afield = "answer$i"	;		
+		  				$data["question$i"] = $row->$qfield;
+		  				$data["answer$i"] = $row->$afield;
+		  			}
+		  		}
+		  		else {
+		  			$data['success'] = false;
+		  		}
+		  		header("Content-Type : application/json");
+		 		echo json_encode($data);
+		  		die();
+		  	}
+		  	if ($action == "verifySecurityAnswers")
+		  	{
+		  		$noOfQuestions = $this->config->item("No_Of_SecQuestions","Login_Setup");
+		  		for ($i = 1; $i <= $noOfQuestions; $i++)
+		  		{
+		  			$var = "answer".$i;
+		  			$$var = $this->input->post("answer".$i, true);
+		  			
+		  		}
+		  		$qryresult = $this->usersmodel->getSecurityQuestions($username);
+		  		if ($qryresult->num_rows() == 1){
+		  			$row = $qryresult->row();
+		  			$uuid = $row->UUID;
+		  			$condition = true;
+		  			for ($i = 1; $i <= $noOfQuestions; $i++)
+		  			{
+		  				$var = "answer".$i;
+		  				//$condition =  $condition && ($$var === $row->$var);
+		  				$condition = $condition && validate_password($$var, $row->$var);
+											  	  			
+		  			}
+		  			if ($condition){
+		  				$data['success'] = true;
+		  				$data['url'] = "/login/resetpwd/$uuid";
+		  			}
+		  			else {
+		  				$data['success'] = false;
+		  			}
+		  		}
+		  		else {
+		  			$data['success'] = false;
+		  		}
+		  		header("Content-Type : application/json");
+		 		echo json_encode($data);
+		  		die();
+		  	}
+		}
+		$data['noOfQuestions'] = $this->config->item("No_Of_SecQuestions","Login_Setup");
+		$this->load->view('view_lostpwd',$data);
+	}
+
+	public function lostpwd2()
+	{
+		$this->load->view('view_lostpwd2');
+	}	
 	
+	public function generateTemporaryPwd()
+	{
+		if ($this->input->post())
+		{
+			//  get ajax call params
+			$username = $this->input->post('username', true);
+			$email = $this->input->post('email', true);
+			log_message('debug', print_r($username, true));
+			log_message('debug', print_r($email, true));
+				
+			$result = $this->usersmodel->getProfileByUsername($username);
+			log_message('debug', print_r($result, true));
+			if (isset($result['row']))
+			{
+				if ($result['row']->Email === $email)
+				{
+					$token = getToken(8);
+					$uuid = $result['row']->ua_uuid;
+					$success = $this->_send_recovery_email($email,$token);
+					if ($success){
+						$result= $this->usersmodel->setNewpwd($uuid, $token, true);
+						if($result['success']) {
+							$data['success'] = true;
+				  			$data['message'] = "Please Login with the temporary password sent to $email";
+						}
+						else {
+					  		$data['success'] = false;
+				 	  		$data['message'] = "An Error Occured, Cannot Reset Password";
+						}
+					}
+					else 
+					{
+						$data['success'] = false;
+						$data['message'] = "Error Sending Email";
+					}
+				}
+				else {
+					$data['success'] = false;
+					$data['message'] = "Invalid Username and Email Combination";
+				}
+			}
+			else {
+				$data['success'] = false;
+				$data['message'] = $result['errmsg'];
+			}
+		}
+		header("Content-Type : application/json");
+		echo json_encode($data);
+		die();
+	}
+	
+	private function _send_recovery_email($user_email, $key) {
+		$domain =  $this->config->slash_item('base_url');
+		$this->load->library('email');
+		$this->email->from('webmaster@' . $domain, 'Password Reset');
+		$this->email->to($user_email);
+		$this->email->subject('Temporary Password Email');
+		$this->email->message("<p> Your New Temporary Password is <b> $key </b>.</p> 
+				                 <p> Please login using your new  temporary password
+		                           You will be prompted to change your password when you login");
+		$result = $this->email->send();
+		return $result;
+	}
+	
+	private function _send_username_email($user_email, $name) {
+		$domain =  $this->config->slash_item('base_url');
+		$this->load->library('email');
+		$this->email->from('webmaster@' . $domain, 'Username Recovery');
+		$this->email->to($user_email);
+		$this->email->subject('UserName Recovery Email');
+		$this->email->message("<p> Your UserName is<b>". $name ."</b>.</p>
+				<p> Please login using your username. </p>
+				If you don't remember your password, please choose the 'Forgot Password' link to recover your password");
+		$result = $this->email->send();
+		return $result;
+	}
 	public function resetpwd($uuid)
 	{
-		$data['uuid'] = $uuid;
 		if ($this->input->post())
 		{
 			log_message('debug', "Post is not empty");
 			$newpasswd = $this->input->post('newPwd');
 			log_message('debug', "newpwd is $newpasswd");
 			$this->load->helper("PasswordHash");
-			$this->load->model('usersmodel');
-			$data= $this->usersmodel->setNewpwd($uuid, $newpasswd);
+			$data= $this->usersmodel->setNewpwd($uuid, $newpasswd, false);
 			if ($data['success'])
 			{
-				$this->_login($uuid);
+					$data['url'] = site_url("login/_login/$uuid");
+				
 			}
-		}			
+			header("Content-Type : application/json");
+			echo json_encode($data);
+			die();
+			
+		}
+		$data['uuid'] = $uuid;
 		$this->load->view('view_resetpwd', $data);
+		
 	}
 
 
-	private function _login($uuid)
+	public function _login($uuid)
 	{
-		$this->load->model('usersmodel') ;
 		$data = $this->usersmodel->getProfileByUuid($uuid);
 		if (!$data['success'] && isset($data['errno'])){
 			log_message("error", $data['errmsg']);
@@ -112,28 +278,29 @@ class Login extends CI_Controller {
 		}
 		if (isset($data['row']))
 		{
-			if ($data['row']->changePassword === "Y")
+			if ($data['row']->force_change === "Y")
 				$this->lostpwd($uuid);
-			if ($data['row']->ua_SecQID === NULL)
+			if ($data['row']->security_ques1 === NULL)
 				redirect("/login/setSecurityQuestion/$uuid");
 			
 			log_message("debug", "Init Session");
-			$_SESSION['MM_UserID'] = $data['row']->UserID;
-			$_SESSION['MM_UUID'] = $data['row']->ua_uuid;
-			$_SESSION['MM_Username'] = $data['row']->Username;
-			$_SESSION['MM_Userrole'] = $data['row']->Role;
-			$_SESSION['MM_ClientID'] = $data['row']->ClientID;
-			$_SESSION['MM_ClientCode'] = $data['row']->clientCode;
-		   $_SESSION['MM_FirstName'] = $data['row']->FirstName;
-         $_SESSION['MM_LastName'] = $data['row']->LastName;
-        	$_SESSION['MM_UserEmail'] = $data['row']->Email;
+			$_SESSION['MM_UUID'] = $data['row']->UUID;
+			$_SESSION['MM_Username'] = $data['row']->username;
+			$_SESSION['MM_Userrole'] = $data['row']->user_group_id;
+			$_SESSION['MM_ClientID'] = $data['row']->client_id;
+			$_SESSION['MM_ClientCode'] = $data['row']->client_loc;
+		   $_SESSION['MM_FirstName'] = $data['row']->first_name;
+         $_SESSION['MM_LastName'] = $data['row']->last_name;
+        	$_SESSION['MM_UserEmail'] = $data['row']->email;
         	log_message("debug", "Redirecting to Dashboard");
-       	redirect('/dashboard');
+       	redirect(site_url('dashboard'));
+		
 		}
-        
 	}
-	private function register()
+	
+	public function register()
 	{
+		$this->load->view('view_register');
 		
 	}
 	
@@ -143,26 +310,35 @@ class Login extends CI_Controller {
 		{
 			log_message('debug', "*****Post is not empty*****");
 			log_message('debug', print_r($this->input->post(), true));
-			$data = array('ua_SecQID' => $this->input->post('question'),
-			              'ua_SecAnswer' => $this->input->post('answer'));
-			$this->db->where("ua_uuid", $uuid);
-			$this->db->update("UserAccount", $data);
-			$this->_login($uuid);
+			$noofques = $this->config->item("No_Of_SecQuestions","Login_Setup");
+			$data = array();
+			for ($i = 1; $i <= $noofques; $i++)
+			{	
+				$data["security_ques$i"] = $this->input->post("question$i", true);
+	      	$data["security_ans$i"] = create_hash($this->input->post("answer$i", true));
+			
+			}
+			$result = $this->usersmodel->setSecurityQuestions($uuid, $data);
+			if ($result['success'])
+				$this->_login($uuid);
 		}
 		else
 		{
 			$viewdata = array();
 			$secQuestions = array();
-			$questions = $this->db->get("LookupSecurityQuestions");
-			
+			$questions = $this->db->get("my_lookup_security_questions");
 			foreach ($questions->result() as $row)
 			{
 				array_push($secQuestions, $row);
 			}
 			$viewdata['uuid'] = $uuid;
+			$viewdata['noOfQuestions'] = $this->config->item("No_Of_SecQuestions","Login_Setup");
 			$viewdata['secQuestions'] = $secQuestions ;
 			$this->load->view('view_securityquestions', $viewdata);
 		}
-		
+	}
+	function logout() {
+		$this->session->sess_destroy();
+		redirect(site_url('/login'));
 	}
 }
