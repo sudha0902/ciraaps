@@ -8,16 +8,16 @@ class Usersmodel extends CI_Model{
 	public function getAllOrderBy($orderby)
 	{
 		$this->db->order_by($orderby);
-		$result = $this->db->get("UserAccount");
+		$result = $this->db->get("my_user_auth");
 		return $result;
 	}
 	
 	public function getProfileByUuid($uuid)
 	{
 		$this->db->select('*');
-		$this->db->from(array("UserAccount UA", "UserProfile UP"));
-		$this->db->where("`UA`.`ua_uuid` = '$uuid' AND
-		                       `UP`.`user_uuid` = `UA`.`ua_uuid`");
+		$this->db->from(array("my_user_auth UA", "my_user_profile UP"));
+		$this->db->where("`UA`.`UUID` = '$uuid' AND
+		                  `UP`.`UUID` = `UA`.`UUID`");
 		$result = $this->db->get();
 		if (!$result)
 		{
@@ -37,11 +37,77 @@ class Usersmodel extends CI_Model{
 		return $data;                                          
 	}
 	
-	public function setNewPwd($uuid, $newpwd)
+	public function getUserName($fname, $lname,$email)
+	{
+		$this->db->select('UA.Username');
+		$this->db->from(array("my_user_orofile UP", 'my_user_auth UA'));
+		$this->db->where("`UP`.`first_name` = '$fname' AND
+				`UP`.`last_name` = '$lname' AND 
+	         `UA`.`email` = '$email' AND
+				`UP`.`UUID` = `UA`.`UUID`");
+		$result = $this->db->get();
+		if (!$result)
+		{
+			$data['errno'] = $this->db->error_number();
+			$data['errmsg'] = $this->db->error_message();
+			$data['success'] = false;
+		}
+		if ($result->num_rows() === 1)
+		{
+			$data['username'] = $result->row()->Username;
+			$data['success'] = true;
+		}
+		else if ($result->num_rows() === 0 )
+		{
+			$data['errmsg'] = "No rows found";
+			$data['success'] = false;
+		}
+		else if ($result->num_rows() > 1 )
+		{
+			$data['errmsg'] = "Two or More Records found";
+			$data['success'] = false;
+		}
+		return $data;
+	}
+
+	public function getProfileByUsername($username)
+	{
+		log_message("debug","***In ProfileUsername");
+		$this->db->select('*');
+		$this->db->from(array("my_user_auth UA", "my_user_orofile UP"));
+		$this->db->where("`UA`.`Username` = '$username' AND
+				            `UP`.`UUID` = `UA`.`UUID`");
+		$result = $this->db->get();
+		if (!$result)
+		{
+			log_message("debug","***Error in query");
+			
+			$data['errno'] = $this->db->error_number();
+			$data['errmsg'] = $this->db->error_message();
+			$data['success'] = false;
+		}
+		if ($result->num_rows() > 0)
+		{
+			log_message("debug","***Success in query");
+				
+			$data['row'] = $result->row();
+			$data['success'] = true;
+		}
+		else
+		{
+			log_message("debug","***No rows query");
+			$data['success'] = false;
+			$data['errmsg'] = "No rows found";
+		}
+		return $data;
+	}
+	
+	public function setNewPwd($uuid, $newpwd, $temp)
 	{
 		$hash = create_hash($newpwd);
-		$this->db->where('ua_uuid',$uuid);
-		$result = $this->db->update('UserAccount',array('password' => $newpwd, 'changePassword' => 'N'));
+		$this->db->where('UUID',$uuid);
+		
+		$result = $this->db->update('my_user_auth',array('password' => $hash, 'force_change' => $temp?True:False));
 		if (!$result)
 		{
 			$data['errno'] = $this->db-error_number();
@@ -52,27 +118,51 @@ class Usersmodel extends CI_Model{
 			$data['success'] = true;
 		
 		return $data;
-    ;
-	}
-	public function getSecurityQuestion($username)
+  	}
+	public function getSecurityQuestions($username)
 	{
-		$sql = "SELECT * 
-					FROM  UserAccount U,  LookupSecurityQuestions L
-					WHERE  U.ua_SecQID =  L.SecQID 
-					AND  U.Username =  '$username'";
+		$username = mysql_real_escape_string($username);
+		$ques_nos = $this->config->item("No_Of_SecQuestions", "Login_Setup");
+		$fields = "UUID, username";
+		$from = " FROM my_user_auth U";
+		$where = " WHERE ";
+	   for ($i = 1; $i <= $ques_nos; $i++){
+			$fields .= ", U.security_ques$i as Qid$i,  L$i.sec_question as question$i, U.security_ans$i as answer$i";
+			$from .= ", my_lookup_security_questions L$i";
+			$where .= "U.security_ques$i = L$i.ID AND ";
+		}
+		$where .= "U.username = '$username'";
+		$sql = "SELECT ".$fields. $from .$where;
 		$result = $this->db->query($sql);
 		return $result;
 	}
-			
+
+	public function setSecurityQuestions($uuid, $data)
+	{
+		
+		$this->db->where("UUID", $uuid);
+		$result = $this->db->update("my_user_auth", $data);
+		if (!$result)
+		{	
+				$data['errno'] = $this->db-error_number();
+				$data['errmsg'] = $this->db->error_message();
+				$data['success'] = false;
+		}
+		else{
+				$data['success'] = true;
+		}
+		return $data;
+	}
 	public function validate_userpwd($username, $password)
 	{
-		$this->db->where(array("Username" => $username, "UserStatus" => "active"));
-		$result = $this->db->get("UserAccount");
+		$username = mysql_real_escape_string($username);
+		$this->db->where(array("username" => $username, "user_status" => "active"));
+		$result = $this->db->get("my_user_auth");
 		if ($result->num_rows() > 0){
 			$row = $result->row();
-			$hash = $row->Password;
+			$hash = $row->password;
 			if(validate_password($password, $hash))
-				$validuser = $row->ua_uuid;
+				$validuser = $row->UUID;
 		   else 
 		   	$validuser = false;
 		}
