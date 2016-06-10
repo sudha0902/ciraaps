@@ -128,24 +128,22 @@ $page = 'UpdatePwd';
 	        pass: "",
 	        update: function(newPwd){
 
-        		 var params = {
-	                //"action": "updatePassword",
+        		   var params = {
 	                "newPwd": newPwd
 	                };
 	            
-	           // var getAction = JSON.stringify(params);
 	            var uuid = '<?php echo $uuid;?>';
 	            $.ajax({
 	                url: '/login/resetpwd/'+uuid,
 	                type: 'POST', 
 	                data: params,
-	               // contentType: 'application/json; charset=utf-8', 
-	                //dataType: 'json',
-	                async: true
-	                //success: function(data){
-	                    // console.dir(data);
-	                    //window.location.assign(data.url);
-	                //}
+	                dataType: 'json',
+	                async: true,
+	                success: function(data){
+	                    console.dir(data);
+	                    if (data.success)
+	                    		window.location.assign(data.url);
+	                }
 	            }); 
 	        
 	        },
@@ -212,11 +210,6 @@ $page = 'UpdatePwd';
 	            
 	            $('#pwResetUser').on('submit', function(e){
 	               e.preventDefault();
-	              	var uuid = '<?php echo $uuid;?>',
-	              	    newpwd = $('#confirmpassword').val();
-		          	//window.location.assign('/login/resetpwd/'+uuid);
-		        	
-	                // console.log($("#newpassword").val());
 	               Update.update($("#newpassword").val());
 	            });
 	            

@@ -80,16 +80,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</form>
 
 				<!-- Step Two -->
+				
 				<form id="pwResetQuestion" class="panel-body hidden">
+				<?php for ($i = 1; $i <= $noOfQuestions; $i++)
+				{ ?>
 					<div class="alert alert-info">
-						<p class="m-none text-weight-semibold h6">Enter your answer to the
+						<p id = "p<?php echo $i?>" class="m-none text-weight-semibold h6">Enter your answer to the
 							security question below.</p>
 					</div>
-
+				
 					<div class="form-group mb-lg">
 						<label>Answer</label>
 						<div class="input-group input-group-icon">
-							<input id="securityanswer" type="text"
+							<input id="securityanswer<?php echo $i?>" type="text"
 								class="form-control input-lg" tabindex=1 autofocus /> <span
 								class="input-group-addon"> <span class="icon icon-lg"> <i
 									class="fa fa-question"></i>
@@ -97,7 +100,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</span>
 						</div>
 					</div>
-
+				<?php 
+				}?>
 					<div class="row">
 						<div class="col-sm-8"></div>
 						<div id="bttnSubmit" class="col-sm-4 text-right">
@@ -176,26 +180,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    },    
 		    attemptLogin: function(user, answer){
 		        var params = {
-		            "action": "getSecurityQuestion",
 		            "userName": user,
-		            "answer": answer
-		        };
+						"action" : "verifySecurityAnswers"
+		            };
+		        for (var i = 1; i <= <?php echo $noOfQuestions;?>; i++)
+		        { 
+			        var prop = 'answer'+i;
+			        var elem = 'securityanswer'+i;
+			        params[prop] = $("input[id='"+elem+"']").val();
+		        }
 	        
 		        $.ajax({
-		            url: '/login/lostpwd', 
+		            url: '/login/lostpwd1', 
 		            type: 'POST', 
 		            data: params,
 		            dataType: 'json',
 		            async: true,
 		            success: function(data){
-		               if (data.success){
+			            console.log(data);
+			            if (data.success){
 		               	window.location.assign(data.url);
 		               }
 		               else{
 		               	$("#pwResetQuestion").addClass('hidden');
 				         	$("#contactadmin").removeClass('hidden');
-		               }
-			               
+		               }  
 		                
 		            }
 		        });
@@ -205,23 +214,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		        Lost.user = user;
 		        
 		        var payload = {
-		            "action": "getSecurityQuestion",
+		            "action": "getSecurityQuestions",
 		            "userName": user
 		        }
 		        
 		        $.ajax({
-		            url: '<?php echo $this->config->base_url()."login/lostpwd"?>', 
+		            url: '<?php echo $this->config->base_url()."login/lostpwd1"?>', 
 		            type: 'POST',
 		            data : payload,
 		            dataType: 'json',
 		            async: true,
 		            success: function(data){
-		                if(data.success && data.question != null){
-		                    $("#pwResetUser").addClass('hidden');
+		                //if(data.success && data.question != null){
+		                if(data.success){
+		                    console.log(data);
+			        	        $("#pwResetUser").addClass('hidden');
 		                    $("#pwResetQuestion").removeClass('hidden');
-		                    $("#pwResetQuestion p").html(data.question);
-		                    // console.log(data);
-		                }else{
+		                    for (var i = 1; i <= <?php echo $noOfQuestions;?>; i++)
+		                    {
+			                     var ptag = "p"+i;
+			                     var field = "question"+i;
+		                    		$("p[id='"+ptag+"']").html(data[field]);
+		                    }
+		                }
+		                else{
 		                    $("#pwResetUser").addClass('hidden');
 				              $("#contactadmin").removeClass('hidden');
 		                }
@@ -238,7 +254,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	   	}
 		};
 
-		if(location.pathname === "/login/lostpwd"){
+		if(location.pathname === "/login/lostpwd1"){
 		    Lost.init();
 		}
 	})(jQuery);

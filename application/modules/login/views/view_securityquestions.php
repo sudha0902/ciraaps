@@ -45,42 +45,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- Step One -->                    
     <form id="pwSQuestion" class="panel-body" method ="post" action = "/login/setSecurityQuestion/<?php echo $uuid?>">
     
-    <div class="form-group mb-lg">
-    <label>Select Question</label>
-    <div class="input-group input-group-icon">
-    <select id="SelectQuestion" name="question" class="form-control input-md" tabindex=1 autofocus>
-<?php
-
-    foreach($secQuestions as $question){
-       /* if($userQ === $question['SecQID']){
-            echo "<option value='". $question['SecQID'] ."' selected>". $question['SecQuestion'] ."</option>";
-        } else*/ {
-            echo "<option value='". $question->SecQID ."'>". $question->SecQuestion ."</option>";
-        }
+    <?php for ($i = 1; $i <= $noOfQuestions; $i++)
+    { 
+    ?>
+    	 <div class="form-group mb-lg">
+	    <label>Select Question</label>
+	    <!--  <div class="input-group input-group-icon">-->
+	    <select id="SelectQuestion<?php echo $i;?>" name="question<?php echo $i;?>" class="form-control input-md" tabindex=1 autofocus>
+			 <?php
+		    foreach($secQuestions as $question){
+		       /* if($userQ === $question['SecQID']){
+		            echo "<option value='". $question['SecQID'] ."' selected>". $question['SecQuestion'] ."</option>";
+		        } else*/ {
+		            echo "<option value='". $question->ID ."'>". $question->sec_question ."</option>";
+		        }
+		    }
+			 ?>    
+    	 </select>
+   	 <!--  </div> -->
+    	 
+	    
+	    <label>Your Answer</label>
+	   <!--  <div class="input-group input-group-icon">-->
+	    <input id="InputAnswer<?php echo $i;?>" name="answer<?php echo $i;?>" class="form-control input-md" tabindex=2 />
+	    
+	   <!-- </div>-->
+	    </div>
+	    </br>
+	 <?php 
     }
-
-?>    
-    </select>
-    <span class="input-group-addon">
-    <span class="icon icon-lg">
-    <i class="fa fa-user"></i>
-    </span>
-    </span>
-    </div>
-    </div>
-
-    <div class="form-group mb-lg">
-    <label>Your Answer</label>
-    <div class="input-group input-group-icon">
-    <input id="InputAnswer" name="answer" class="form-control input-md" tabindex=2 />
-    <span class="input-group-addon">
-    <span class="icon icon-lg">
-    <i class="fa fa-user"></i>
-    </span>
-    </span>
-    </div>
-    </div>
-
+    ?>
     <div class="row">
     <div class="col-sm-8">
     </div>

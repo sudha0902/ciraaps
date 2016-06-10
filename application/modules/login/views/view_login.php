@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet"
-	href=".assets/vendor/font-awesome/css/font-awesome.css" />
+	href="/assets/vendor/font-awesome/css/font-awesome.css" />
 	<link rel="stylesheet"
 	href="/assets/vendor/magnific-popup/magnific-popup.css" />
 	<link rel="stylesheet"
@@ -48,24 +48,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="panel-body">
 					<form id="login_form" method = "post" action="/login">
 						<div class="form-group mb-lg">
-							<label>Username</label>
+							<div class="clearfix">
+								<label>Username</label>
+								<?php if($login_setup['Username_Retrieval']){?>
+								  <a	href="/login/forgotUserName" class="pull-right">Forgot UserName?</a>
+								<?php }?>
+							</div>
 							<div class="input-group input-group-icon">
 								<input id="username" name="username" type="text"
 									class="form-control input-lg" tabindex=1 autofocus
 									<?php if (isset($username))
 									{ echo "value = '$username'";}?> />
-									<span	class="input-group-addon">
-									<span class="icon icon-lg"> <i
-										class="fa fa-user"></i>
+								<span	class="input-group-addon">
+									<span class="icon icon-lg"> 
+										<i class="fa fa-user"></i>
 									</span>
-									</span>
+								</span>
 							</div>
 						</div>
 
 						<div class="form-group mb-lg">
 							<div class="clearfix">
-								<label class="pull-left">Password</label> <a
-									href="/login/lostpwd" class="pull-right">Lost Password?</a>
+								<label class="pull-left">Password</label> 
+								<?php if($login_setup['Pwd_Retrieval']){?>
+								  <a	href="/login/forgotPwd" class="pull-right">Forgot Password?</a>
+								<?php }?>
 							</div>
 							<div class="input-group input-group-icon">
 								<input id="pwd" name="pwd" type="password"
@@ -73,20 +80,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<?php if (isset($pwd))
 									{ echo "value = '$pwd'";}?> /> 
 								<span	class="input-group-addon">
-								 <span class="icon icon-lg"> <i
-										class="fa fa-lock"></i>
-								</span>
+								   <span class="icon icon-lg"> 
+										<i class="fa fa-lock"></i>
+								   </span>
 								</span>
 							</div>
 						</div>
 
 						<div class=""form-group mb-lg"">
 							<div class="col-sm-8">
-								<!--<p>  sign into our demo system  </p>
-												<div class="checkbox-custom checkbox-default">
-												<input id="RememberMe" name="rememberme" type="checkbox"/>
-												<label for="RememberMe">Remember Me</label>
-												</div> -->
 							</div>
 							
 							<div id="signIn" class="col-sm-4 text-right">
@@ -94,9 +96,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">
 								Sign In</button>
 							</div>
+							<?php if ($login_setup['Sign_Up']){?>
 							<div class="clearfix">
 								<a	href="/login/register" class="pull-left">Register</a>
 							</div>
+							<?php }?>
 						</div>
 
 						<div class="row ">
