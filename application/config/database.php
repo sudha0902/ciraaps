@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => 'toor',
 	'database' => 'managing_yours',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
+	'dbprefix' => 'my_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,

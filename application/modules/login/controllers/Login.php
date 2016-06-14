@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 		$this->load->database();
 		$this->load->config('auth_config');
 		$this->load->library(array('session', 'form_validation'));
-		$this->load->helper(array('url','language','PasswordHash'));
+		$this->load->helper(array('url','language','PasswordHash', 'base_helper'));
 		$this->load->model('usersmodel');
 		$this->form_validation->set_error_delimiters($this->config->item('<div class="alert alert-danger">', '</div>'));
 	}
@@ -24,8 +24,8 @@ class Login extends CI_Controller {
 		//redirect("/login/setSecurityQuestion/$uuid");
 		if ($this->input->post())
 		{
-  	  		$username = $this->input->post('username', true);
-			$pwd = $this->input->post('pwd', true);
+  	  		$username = strtolower(trim($this->input->post('username', true)));
+			$pwd = trim($this->input->post('pwd', true));
 			$valid_uuid = $this->usersmodel->validate_userpwd($username, $pwd);
 			if (!$valid_uuid){
 				$data['username'] = $username;
@@ -34,7 +34,7 @@ class Login extends CI_Controller {
 			}
 			else 
 			{
-				$this->login($valid_uuid);
+				$this->_login($valid_uuid);
 			}
 		}
 		else{ 
@@ -49,9 +49,9 @@ class Login extends CI_Controller {
 		
 		if ($this->input->post())
 		{
-			$fname = $this->input->post('fname', true);
-			$lname = $this->input->post('lname', true);
-			$email = $this->input->post('email', true);
+			$fname = trim($this->input->post('fname', true));
+			$lname = trim($this->input->post('lname', true));
+			$email = trim($this->input->post('email', true));
 			$result = $this->usersmodel->getUserName($fname, $lname, $email);	
 			if ($result['success'])
 			{
@@ -99,7 +99,7 @@ class Login extends CI_Controller {
 		{
 	   	//  get ajax call params
  		  	$action = $this->input->post('action', true);
-		  	$username = $this->input->post('userName', true);
+		  	$username = strtolower(trim($this->input->post('userName', true)));
 		  	if ($action == "getSecurityQuestions")	
 		  	{	  	
 		  		$qryresult = $this->usersmodel->getSecurityQuestions($username);
@@ -173,7 +173,7 @@ class Login extends CI_Controller {
 		if ($this->input->post())
 		{
 			//  get ajax call params
-			$username = $this->input->post('username', true);
+			$username = strtolower(trim($this->input->post('username', true)));
 			$email = $this->input->post('email', true);
 			log_message('debug', print_r($username, true));
 			log_message('debug', print_r($email, true));
@@ -284,14 +284,16 @@ class Login extends CI_Controller {
 				redirect("/login/setSecurityQuestion/$uuid");
 			
 			log_message("debug", "Init Session");
-			$_SESSION['MM_UUID'] = $data['row']->UUID;
-			$_SESSION['MM_Username'] = $data['row']->username;
-			$_SESSION['MM_Userrole'] = $data['row']->user_group_id;
-			$_SESSION['MM_ClientID'] = $data['row']->client_id;
-			$_SESSION['MM_ClientCode'] = $data['row']->client_loc;
-		   $_SESSION['MM_FirstName'] = $data['row']->first_name;
-         $_SESSION['MM_LastName'] = $data['row']->last_name;
-        	$_SESSION['MM_UserEmail'] = $data['row']->email;
+			$user_info = array( 'MM_UUID'=> $data['row']->UUID ,             
+										'MM_Username'=> $data['row']->username ,     
+										'MM_Userrole'=> $data['row']->user_group_id ,
+										'MM_ClientID'=> $data['row']->client_id ,    
+										'MM_ClientCode'=> $data['row']->client_loc , 
+										'MM_FirstName'=> $data['row']->first_name ,  
+										'MM_LastName'=> $data['row']->last_name ,    
+										'MM_UserEmail'=> $data['row']->email ) ;      
+			$this->session->set_userdata($user_info);
+			log_message("debug", print_r( $this->session->all_userdata(),true)); 
         	log_message("debug", "Redirecting to Dashboard");
        	redirect(site_url('dashboard'));
 		

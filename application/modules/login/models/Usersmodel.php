@@ -8,14 +8,14 @@ class Usersmodel extends CI_Model{
 	public function getAllOrderBy($orderby)
 	{
 		$this->db->order_by($orderby);
-		$result = $this->db->get("my_user_auth");
+		$result = $this->db->get("user_auth");
 		return $result;
 	}
 	
 	public function getProfileByUuid($uuid)
 	{
 		$this->db->select('*');
-		$this->db->from(array("my_user_auth UA", "my_user_profile UP"));
+		$this->db->from(array("user_auth UA", "user_profile UP"));
 		$this->db->where("`UA`.`UUID` = '$uuid' AND
 		                  `UP`.`UUID` = `UA`.`UUID`");
 		$result = $this->db->get();
@@ -40,7 +40,7 @@ class Usersmodel extends CI_Model{
 	public function getUserName($fname, $lname,$email)
 	{
 		$this->db->select('UA.Username');
-		$this->db->from(array("my_user_orofile UP", 'my_user_auth UA'));
+		$this->db->from(array("user_orofile UP", 'user_auth UA'));
 		$this->db->where("`UP`.`first_name` = '$fname' AND
 				`UP`.`last_name` = '$lname' AND 
 	         `UA`.`email` = '$email' AND
@@ -74,7 +74,7 @@ class Usersmodel extends CI_Model{
 	{
 		log_message("debug","***In ProfileUsername");
 		$this->db->select('*');
-		$this->db->from(array("my_user_auth UA", "my_user_orofile UP"));
+		$this->db->from(array("user_auth UA", "user_orofile UP"));
 		$this->db->where("`UA`.`Username` = '$username' AND
 				            `UP`.`UUID` = `UA`.`UUID`");
 		$result = $this->db->get();
@@ -107,7 +107,7 @@ class Usersmodel extends CI_Model{
 		$hash = create_hash($newpwd);
 		$this->db->where('UUID',$uuid);
 		
-		$result = $this->db->update('my_user_auth',array('password' => $hash, 'force_change' => $temp?True:False));
+		$result = $this->db->update('user_auth',array('password' => $hash, 'force_change' => $temp?True:False));
 		if (!$result)
 		{
 			$data['errno'] = $this->db-error_number();
@@ -124,11 +124,11 @@ class Usersmodel extends CI_Model{
 		$username = mysql_real_escape_string($username);
 		$ques_nos = $this->config->item("No_Of_SecQuestions", "Login_Setup");
 		$fields = "UUID, username";
-		$from = " FROM my_user_auth U";
+		$from = " FROM user_auth U";
 		$where = " WHERE ";
 	   for ($i = 1; $i <= $ques_nos; $i++){
 			$fields .= ", U.security_ques$i as Qid$i,  L$i.sec_question as question$i, U.security_ans$i as answer$i";
-			$from .= ", my_lookup_security_questions L$i";
+			$from .= ", lookup_security_questions L$i";
 			$where .= "U.security_ques$i = L$i.ID AND ";
 		}
 		$where .= "U.username = '$username'";
@@ -141,7 +141,7 @@ class Usersmodel extends CI_Model{
 	{
 		
 		$this->db->where("UUID", $uuid);
-		$result = $this->db->update("my_user_auth", $data);
+		$result = $this->db->update("user_auth", $data);
 		if (!$result)
 		{	
 				$data['errno'] = $this->db-error_number();
@@ -156,8 +156,8 @@ class Usersmodel extends CI_Model{
 	public function validate_userpwd($username, $password)
 	{
 		$username = mysql_real_escape_string($username);
-		$this->db->where(array("username" => $username, "user_status" => "active"));
-		$result = $this->db->get("my_user_auth");
+		$this->db->where(array("username" => $username, "user_status" => "1"));
+		$result = $this->db->get("user_auth");
 		if ($result->num_rows() > 0){
 			$row = $result->row();
 			$hash = $row->password;
