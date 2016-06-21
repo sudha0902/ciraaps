@@ -282,24 +282,34 @@ class Login extends CI_Controller {
 				$this->lostpwd($uuid);
 			if ($data['row']->security_ques1 === NULL)
 				redirect("/login/setSecurityQuestion/$uuid");
-			
-			log_message("debug", "Init Session");
-			$user_info = array( 'MM_UUID'=> $data['row']->UUID ,             
-										'MM_Username'=> $data['row']->username ,     
-										'MM_Userrole'=> $data['row']->user_group_id ,
-										'MM_ClientID'=> $data['row']->client_id ,    
-										'MM_ClientCode'=> $data['row']->client_loc , 
-										'MM_FirstName'=> $data['row']->first_name ,  
-										'MM_LastName'=> $data['row']->last_name ,    
-										'MM_UserEmail'=> $data['row']->email ) ;      
-			$this->session->set_userdata($user_info);
-			log_message("debug", print_r( $this->session->all_userdata(),true)); 
-        	log_message("debug", "Redirecting to Dashboard");
-       	redirect(site_url('dashboard'));
+			$this->load->model("Groupsmodel");
+			$group_name = $this->Groupsmodel->get_name($data['row']->user_group_id);
+			$this->_store_session_vars($data);
+       	log_message("debug", "Redirecting to Dashboard $top_page");
+        	$top_page = $this->Groupsmodel->get_top_page($data['row']->user_group_id);
+        	if ($top_page)
+       		redirect(site_url("dashboard/$top_page"));
+        	else 
+        		$this->load->view('error_404');
 		
 		}
 	}
-	
+	public function _store_session_vars($data)
+	{
+		log_message("debug", "Init Session");
+		$user_info = array( 'MM_UUID'=> $data['row']->UUID ,
+				'MM_Username'=> $data['row']->username ,
+				'MM_Usergroup'=> $data['row']->user_group_id ,
+				'MM_Group' => $group_name,
+				'MM_ClientID'=> $data['row']->client_id ,
+				'MM_ClientCode'=> $data['row']->client_loc ,
+				'MM_FirstName'=> $data['row']->first_name ,
+				'MM_LastName'=> $data['row']->last_name ,
+				'MM_UserEmail'=> $data['row']->email ) ;
+		$this->session->set_userdata($user_info);
+		log_message("debug", print_r( $this->session->all_userdata(),true));
+		return;
+	}
 	public function register()
 	{
 		$this->load->view('view_register');

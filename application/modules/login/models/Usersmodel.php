@@ -15,9 +15,10 @@ class Usersmodel extends CI_Model{
 	public function getProfileByUuid($uuid)
 	{
 		$this->db->select('*');
-		$this->db->from(array("user_auth UA", "user_profile UP"));
-		$this->db->where("`UA`.`UUID` = '$uuid' AND
-		                  `UP`.`UUID` = `UA`.`UUID`");
+		$this->db->from(array("user_auth"));
+		$this->db->join('user_profile','user_profile.UUID = user_auth.UUID');
+		$this->db->where("user_auth.UUID" , $uuid );
+		                       
 		$result = $this->db->get();
 		if (!$result)
 		{
